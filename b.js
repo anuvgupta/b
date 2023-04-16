@@ -88,11 +88,11 @@ console.log(`${prefix} > ${buildTargetCommand}`);
 console.log();
 
 // execute target command
-const buildTargetProcess = ChildProcess.exec(`${buildTargetCommand}`, {
+const buildTargetProcess = ChildProcess.spawn(`${buildTargetCommand}`, {
+    shell: true,
+    stdio: "inherit",
     cwd: buildDirectory,
 });
-buildTargetProcess.stdout.pipe(process.stdout);
-buildTargetProcess.stderr.pipe(process.stderr);
 buildTargetProcess.on("close", (code) => {
     console.log();
     const message = `${prefix} Build target process exited with code ${code}`;
