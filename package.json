@@ -1,0 +1,14 @@
+{
+  "name": "b.ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "b.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "b": "./b.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
