@@ -74,10 +74,21 @@ const buildTargets = buildConfig.targets;
 
 // get build target command
 if (!buildTargets.hasOwnProperty(buildTarget)) {
-    console.error(
-        `${prefix} Build target ${buildTarget} not found in targets for build config ${buildFilePath}`
-    );
-    process.exit(1);
+    // translate build target shorthand
+    var options = [];
+    for (var buildTargetOption in buildTargets) {
+        if (buildTargetOption[0] === buildTarget[0]) {
+            options.push(buildTargetOption);
+        }
+    }
+    if (options.length >= 1) {
+        buildTarget = options[0];
+    } else {
+        console.error(
+            `${prefix} Build target ${buildTarget} not found in targets for build config ${buildFilePath}`
+        );
+        process.exit(1);
+    }
 }
 const buildTargetCommand = buildTargets[buildTarget];
 
