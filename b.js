@@ -20,9 +20,9 @@ var buildDirectory = "";
 const args = process.argv.slice(2);
 if (args.length >= 1) {
     buildTarget = `${args[0].toString()}`;
-    if (args.length >= 2) {
-        buildDirectory = `${args[1].toString()}`;
-    }
+    // if (args.length >= 2) {
+    //     buildDirectory = `${args[1].toString()}`;
+    // }
 }
 if (buildTarget === "") {
     buildTarget = "build";
@@ -90,7 +90,11 @@ if (!buildTargets.hasOwnProperty(buildTarget)) {
         process.exit(1);
     }
 }
-const buildTargetCommand = buildTargets[buildTarget];
+let buildTargetCommand = buildTargets[buildTarget];
+if (args.length >= 2) {
+    const argsString = args.slice(1).join(" ");
+    buildTargetCommand += ` ${argsString}`;
+}
 
 // print target configuration
 console.log(`${prefix} > ${buildPackage} ${buildTarget}`);
